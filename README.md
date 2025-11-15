@@ -9,7 +9,7 @@
 </p>
   <figcaption align="center"><b>Figure.</b> Examples of blood cell types: an erythroblast, a monocyte and a platelet.</figcaption>
 </figure>
-</br></br></br>
+</br></br>
 
 -----------------------------
 
