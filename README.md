@@ -9,12 +9,11 @@
 </p>
   <figcaption align="center"><b>Figure.</b> Examples of blood cell types: an erythroblast, a monocyte and a platelet.</figcaption>
 </figure>
+</br>
 
-Recognizing blood cell types in microscopic images is an important task in clinical diagnostics. Although this problem has been studied for decades, new machine learning and deep learning approaches continue to improve classification accuracy.
+Recognizing blood cell types in microscopic images is an important task in clinical diagnostics. Although this problem has been studied for decades, new machine learning and deep learning approaches continue to improve classification accuracy. In the research article by [Acevedo et al. (2019)](https://www.sciencedirect.com/science/article/abs/pii/S0169260719303578?via%3Dihub), the authors were one of the first to apply convolutional neural networks (CNNs) to classify various blood cell types, including different leukocyte subtypes, immature granulocytes, erythroblasts, and platelets. Their best model achieved an overall accuracy of over 96%, demonstrating strong potential for automated blood cell classification.
 
-In the research article by [Acevedo et al. (2019)](https://www.sciencedirect.com/science/article/abs/pii/S0169260719303578?via%3Dihub), the authors were the first to apply convolutional neural networks (CNNs) to classify various blood cell types, including different leukocyte subtypes, immature granulocytes, erythroblasts, and platelets. Their best model achieved an overall accuracy of over 96%, demonstrating strong potential for automated blood cell classification.
-
-The dataset used in this project is publicly available on Mendeley Data: https://data.mendeley.com/datasets/snkd93bnjr/1. It contains a total of 17,092 images of individual normal cells, which were acquired using a microscope called the analyzer CellaVision DM96 in the Core Laboratory at the Hospital Clinic of Barcelona. The dataset is organized in the following eight groups: neutrophils, eosinophils, basophils, lymphocytes, monocytes, immature granulocytes (promyelocytes, myelocytes, and metamyelocytes), erythroblasts and platelets or thrombocytes. The size of the images is 360 x 363 pixels, in format JPG, and they were annotated by expert clinical pathologists. The images were captured from individuals without infection, hematologic or oncologic disease and free of any pharmacologic treatment at the moment of blood collection.
+The dataset used in this project is publicly available on Mendeley Data by [Acevedo et al. (2019)](https://www.sciencedirect.com/science/article/abs/pii/S0169260719303578?via%3Dihub): https://data.mendeley.com/datasets/snkd93bnjr/1. It contains a total of 17,092 images of individual normal cells, which were acquired using a microscope called the analyzer CellaVision DM96 in the Core Laboratory at the Hospital Clinic of Barcelona (i.e. H&E stain images). H&E is the combination of two histological stains: hematoxylin and eosin. The hematoxylin stains cell nuclei a purplish blue, and eosin stains the extracellular matrix and cytoplasm pink, with other structures taking on different shades, hues, and combinations of these colors. The dataset is organized in the following eight groups: neutrophils, eosinophils, basophils, lymphocytes, monocytes, immature granulocytes (promyelocytes, myelocytes, and metamyelocytes), erythroblasts and platelets or thrombocytes. The size of the images is 360 x 363 pixels, in format JPG, and they were annotated by expert clinical pathologists. The images were captured from individuals without infection, hematologic or oncologic disease and free of any pharmacologic treatment at the moment of blood collection.
 
 
 # Project Overview
@@ -42,13 +41,13 @@ MLOps | Deployment:
 
 ## Usage
 
-Example usage from a terminal:
-
+Submit an image URL to the deployed AWS Lambda function via curl. In this example,
+platelet_example.png is an H&E-stained platelet image hosted on GitHub:
 ```{bash}
-curl -X POST   -H "Content-Type: application/json"   -d '{"url": "https://raw.githubusercontent.com/katwre/Immune-cell-classifier-api/main/images/platelet_example.png"}'   https://n52ns6pv5ifcgefr76a4zm5m2u0xayxf.lambda-url.eu-west-1.on.aws/
+curl -X POST -H "Content-Type: application/json" -d '{"url": "https://raw.githubusercontent.com/katwre/Immune-cell-classifier-api/main/images/platelet_example.png"}' https://n52ns6pv5ifcgefr76a4zm5m2u0xayxf.lambda-url.eu-west-1.on.aws/
 ```
 
-Example output:
+Example response - the model returns a probability distribution over the eight immune cell classes:
 ```{json}
 {"predictions": {"basophil": 0.0, "eosinophil": 0.0, "erythroblast": 0.08, "ig": 0.0, "lymphocyte": 0.0, "monocyte": 0.0, "neutrophil": 0.0, "platelet": 0.91}}
 ```
@@ -60,7 +59,7 @@ Example output:
 
 The repository contains:
 ```{bash}
-Classify_immune_cells/
+Immune-cell-classifier-api/
 ├── notebooks/
     └── Classify_immune_cells.ipynb # Data preparation and cleaning, EDA, feature importance, model selection process, parameter tuning
 ├── src/
@@ -107,7 +106,7 @@ $(aws ecr get-login --no-include-email)
 ```
 4. Define environment variables
 ```{bash}
-ACCOUNT=882746022003
+ACCOUNT=XXXXXXXXXX # copy paste your aws account if
 REGION=eu-west-1
 REGISTRY=immunecells-tflite-images
 PREFIX=${ACCOUNT}.dkr.ecr.${REGION}.amazonaws.com/${REGISTRY}
