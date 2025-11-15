@@ -9,7 +9,9 @@
 </p>
   <figcaption align="center"><b>Figure.</b> Examples of blood cell types: an erythroblast, a monocyte and a platelet.</figcaption>
 </figure>
-</br>
+</br></br></br>
+
+-----------------------------
 
 Recognizing blood cell types in microscopic images is an important task in clinical diagnostics. Although this problem has been studied for decades, new machine learning and deep learning approaches continue to improve classification accuracy. In the research article by [Acevedo et al. (2019)](https://www.sciencedirect.com/science/article/abs/pii/S0169260719303578?via%3Dihub), the authors were one of the first to apply convolutional neural networks (CNNs) to classify various blood cell types, including different leukocyte subtypes, immature granulocytes, erythroblasts, and platelets. Their best model achieved an overall accuracy of over 96%, demonstrating strong potential for automated blood cell classification.
 
