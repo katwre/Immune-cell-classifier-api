@@ -21,7 +21,7 @@ The dataset used in this project is publicly available on Mendeley Data by [Acev
 # Project Overview
 
 
-I applied transfer learning with a pretrained Xception model as a fixed feature extractor and trained a small neural classification head on top of it. I additionally extracted Xception embeddings and trained classical machine learning models such as logistic regression and XGBoost to provide an interpretable baseline. Hyperparameters such as learning rate and dropout rate were tuned, and the best-performing model achieved strong accuracy on the test set. The classical ML approach also performed well, producing detailed per-class performance metrics. Overall, transfer learning proved to be an effective strategy for immune-cell image classification. I compared my results with those reported by [Acevedo et al 2019](https://www.sciencedirect.com/science/article/abs/pii/S0169260719303578?via%3Dihub).
+I applied transfer learning with a pretrained Xception model as a fixed feature extractor and trained a small custom MLP classification head on top of it. I additionally extracted Xception embeddings and trained classical machine learning models such as logistic regression and XGBoost to provide an interpretable baseline. Hyperparameters such as learning rate and dropout rate were tuned, and the model using the MLP head achieved strong accuracy on the test set. The classical ML approach also performed well, producing detailed per-class performance metrics. Overall, transfer learning proved to be an effective strategy for immune-cell image classification. Overall, the results confirm that transfer learning is a strong approach for immune-cell image classification and are consistent with findings from [Acevedo et al 2019](https://www.sciencedirect.com/science/article/abs/pii/S0169260719303578?via%3Dihub).
 
 
 
@@ -108,7 +108,7 @@ $(aws ecr get-login --no-include-email)
 ```
 4. Define environment variables
 ```{bash}
-ACCOUNT=XXXXXXXXXX # copy paste your aws account if
+ACCOUNT=XXXXXXXXXX # copy paste your aws account id
 REGION=eu-west-1
 REGISTRY=immunecells-tflite-images
 PREFIX=${ACCOUNT}.dkr.ecr.${REGION}.amazonaws.com/${REGISTRY}
