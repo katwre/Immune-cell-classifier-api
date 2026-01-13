@@ -57,6 +57,17 @@ Example response - the model returns a probability distribution over the eight i
 {"predictions": {"basophil": 0.0, "eosinophil": 0.0, "erythroblast": 0.08, "ig": 0.0, "lymphocyte": 0.0, "monocyte": 0.0, "neutrophil": 0.0, "platelet": 0.91}}
 ```
 
+<figure>
+<p align="center">
+  <img src="images/example_platelet.gif" width="1600" />
+</p>
+</figure>
+
+⚠️ **Service availability note:** 
+
+This service runs on AWS Lmabda and may be temporarily offline to limit cloud costs. All functionality can be reproduced locally using Docker.
+
+
 
 ## Installation
 
@@ -154,3 +165,8 @@ Example output:
 {"predictions": {"basophil": 0.0, "eosinophil": 0.0, "erythroblast": 0.89, "ig": 0.01, "lymphocyte": 0.01, "monocyte": 0.08, "neutrophil": 0.01, "platelet": 0.0}}
 ```
 
+<figure>
+<p align="center">
+  <img src="images/example_erythroblast.gif" width="1600" />
+</p>
+</figure>
